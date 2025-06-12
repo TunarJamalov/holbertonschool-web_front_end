@@ -206,7 +206,7 @@ a:active {
 }
 .skip-link:focus{
     opacity: 1;
-    transform: translate(0);
+    transform: translateY(0);
 }
 
 /*** 2. LAYOUT ***/

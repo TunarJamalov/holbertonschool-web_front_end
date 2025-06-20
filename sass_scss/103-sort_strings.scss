@@ -1,0 +1,25 @@
+$list_to_sort: tunar ruhlan camal amil faiq uğur;
+
+@function sort-list($list) {
+  @if length($list) <= 1 {
+    @return $list;
+  }
+
+  $pivot: nth($list, 1);
+  $less: ();
+  $greater: ();
+
+  @for $i from 2 through length($list) {
+    $item: nth($list, $i);
+    @if str-to-lower-case($item) < str-to-lower-case($pivot) {
+      $less: append($less, $item);
+    } @else {
+      $greater: append($greater, $item);
+    }
+  }
+
+  @return join(sort-list($less), $pivot, 'space') + ' ' + join(sort-list($greater), 'space');
+}
+
+$sorted-list: sort-list($list_to_sort);
+@debug $sorted-list;

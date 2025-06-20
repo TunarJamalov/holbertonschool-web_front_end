@@ -1,6 +1,6 @@
 @use "sass:list";
 
-$list_to_sort: tunar ruhlan camal amil faiq uğur;
+$list_to_sort: john anna zoe kim felicia carrie;
 
 @function sort-list($list) {
   @if list.length($list) <= 1 {

@@ -1,24 +1,26 @@
+@use "sass:list";
+
 $list_to_sort: tunar ruhlan camal amil faiq uğur;
 
 @function sort-list($list) {
-  @if length($list) <= 1 {
+  @if list.length($list) <= 1 {
     @return $list;
   }
 
-  $pivot: nth($list, 1);
+  $pivot: list.nth($list, 1);
   $less: ();
   $greater: ();
 
-  @for $i from 2 through length($list) {
-    $item: nth($list, $i);
-    @if str-to-lower-case($item) < str-to-lower-case($pivot) {
-      $less: append($less, $item);
+  @for $i from 2 through list.length($list) {
+    $item: list.nth($list, $i);
+    @if $item < $pivot {
+      $less: list.append($less, $item);
     } @else {
-      $greater: append($greater, $item);
+      $greater: list.append($greater, $item);
     }
   }
 
-  @return join(sort-list($less), $pivot, 'space') + ' ' + join(sort-list($greater), 'space');
+  @return list.join(sort-list($less), list.join(($pivot,), sort-list($greater)), space);
 }
 
 $sorted-list: sort-list($list_to_sort);

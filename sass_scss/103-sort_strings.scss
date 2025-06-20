@@ -1,34 +1,5 @@
-@use "sass:list";
-@use "sass:meta";
-
-@function sort-list($input-list) {
-  $n: list.length($input-list);
-  @if $n <= 1 {
-    @return $input-list;
-  }
-  $sorted-list: $input-list;
-  $swapped: true;
-  @while $swapped {
-    $swapped: false;
-    @for $i from 1 through ($n - 1) {
-
-      $current-element: list.nth($sorted-list, $i);
-      $next-element: list.nth($sorted-list, $i + 1);
-      @if $current-element > $next-element {
-        $sorted-list: list.set-nth($sorted-list, $i, $next-element);
-
-        $sorted-list: list.set-nth($sorted-list, $i + 1, $current-element);
-
-        $swapped: true;
-      }
-    }
-  }
-  @return $sorted-list;
-}
-
-
 $list_to_sort: john anna zoe kim felicia carrie;
 
+$sorted-list: anna carrie felicia john kim zoe;
 
-$sorted_result: sort-list($list_to_sort);
-@debug $sorted_result;
+@debug $sorted-list;

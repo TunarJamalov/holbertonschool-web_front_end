@@ -1,5 +1,5 @@
 @use "sass:list";
-$list_to_sort: john anna zoe kim felicia carrie;
+@use "sass:string";
 
 @function sort-list($list) {
   @if list.length($list) <= 1 {
@@ -12,7 +12,9 @@ $list_to_sort: john anna zoe kim felicia carrie;
 
   @for $i from 2 through list.length($list) {
     $item: list.nth($list, $i);
-    @if str-index($item + "", $pivot + "") == null and $item < $pivot {
+
+    // string.compare(a, b) < 0  → a < b
+    @if string.compare($item, $pivot) < 0 {
       $less: list.append($less, $item);
     } @else {
       $greater: list.append($greater, $item);
@@ -21,6 +23,8 @@ $list_to_sort: john anna zoe kim felicia carrie;
 
   @return list.join(sort-list($less), list.join(($pivot,), sort-list($greater)), space);
 }
+
+$list_to_sort: john anna zoe kim felicia carrie;
 
 $sorted-list: sort-list($list_to_sort);
 @debug $sorted-list;
